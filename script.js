@@ -17,6 +17,28 @@ function setPosition(position) {
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
     updateMarker([lat, lon])
+
+    var ipapi = `https://geo.ipify.org/api/v1?apiKey=at_NRx7giVcx5NsWFc3QjIxRlvX9oJYH`
+    fetch(ipapi)
+        .then(responseip => {
+            return responseip.json();
+        })
+        .then(ipdata => {
+            var yourIpIs = ipdata.ip;
+            var country = ipdata.location.country;
+            var timezone = ipdata.location.timezone;
+            var isp = ipdata.isp;
+            document.getElementById('ip').innerHTML = `<p>IP Address</p>
+            <h1>${yourIpIs}</h1>`
+            document.getElementById('location').innerHTML = `<p>Country</p>
+        <h1>${country}</h1>`
+            document.getElementById('time-zone').innerHTML = `<p>Time Zone</p>
+        <h1>${timezone}</h1>`
+            document.getElementById('isp').innerHTML = `<p>ISP</p>
+        <h1>${isp}</h1>`
+        })
+
+
 }
 
 
@@ -40,6 +62,7 @@ document.getElementById('search-entred-location').addEventListener('click', () =
         <h1>${timezone}</h1>`
             document.getElementById('isp').innerHTML = `<p>ISP</p>
         <h1>${isp}</h1>`
+
         })
 
 })
